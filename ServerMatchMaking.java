@@ -263,6 +263,19 @@ public class ServerMatchMaking {
             List<Giocatore> candidato = new ArrayList<>(
                     ordinati.subList(i, i + NGG));
 
+                            int minimo = candidato.get(0).livello;
+            int massimo = candidato.get(NGG - 1).livello;
+
+            if (massimo - minimo <= DML) {
+                return candidato;
+            }
+        }
+
+        // Nessun gruppo compatibile
+        return null;
+    }
+}
+
 
 
 
