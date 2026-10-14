@@ -62,6 +62,40 @@ public class ServerMatchMaking {
                 try {
                     Socket socket = server.accept();
 
+                    System.out.println("Nuovo client: "
+                            + socket.getInetAddress()
+                                    .getHostAddress());
+
+                    // Un thread indipendente per ogni client
+                    Thread thread =
+                            new Thread(new GestoreClient(socket));
+
+                            thread.setDaemon(true);
+                    thread.start();
+
+                } catch (SocketException e) {
+                    // La chiusura del server interrompe accept()
+                    if (server.isClosed()) {
+                        break;
+                    }
+
+                    throw e;
+                }
+            }
+
+               } catch (IOException e) {
+            System.out.println("Errore server: "
+                    + e.getMessage());
+
+        } finally {
+            if (server != null && !server.isClosed()) {
+                try {
+                    server.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
+
 
 
 
