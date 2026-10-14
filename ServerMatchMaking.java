@@ -12,9 +12,9 @@ public class ServerMatchMaking {
     private static final int DML = 2;
 
     //Giocatori in attesa di match
-    private static final List<Giocatore>InAttesa = new ArrayList<>();
+    private static final List<Giocatore> inAttesa = new ArrayList<>();
 
-        // Protegge il pool quando più thread lo utilizzano
+    // Protegge il pool quando più thread lo utilizzano
     private static final Object lock = new Object();
 
     public static void main(String[] args) {
@@ -279,4 +279,3 @@ public class ServerMatchMaking {
 
 
 
-       }
