@@ -96,6 +96,29 @@ public class ServerMatchMaking {
             }
         }
 
+        System.out.println("Server terminato.");
+    }
+
+    // Rappresenta un giocatore
+    static class Giocatore {
+
+        String nickname;
+        String ip;
+        int livello;
+        PrintWriter output;
+
+         // Il thread resta in attesa finché non viene abbinato
+        CountDownLatch attesaMatch = new CountDownLatch(1);
+
+         Giocatore(String nickname, String ip,
+                  int livello, PrintWriter output) {
+            this.nickname = nickname;
+            this.ip = ip;
+            this.livello = livello;
+            this.output = output;
+        }
+    }
+
 
 
 
