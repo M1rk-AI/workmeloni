@@ -195,6 +195,39 @@ public class ServerMatchMaking {
         }
     }
 
+    // Crea tutti i gruppi attualmente possibili
+    private static void creaMatchPossibili() {
+
+        while (true) {
+
+            List<Giocatore> gruppo = trovaGruppo();
+
+            if (gruppo == null) {
+                return;
+            }
+
+            // I giocatori scelti non sono più in attesa
+            inAttesa.removeAll(gruppo);
+
+            System.out.println("Match creato:");
+
+            for (Giocatore g : gruppo) {
+                System.out.println(g.nickname
+                        + " - livello " + g.livello);
+            }
+
+            // Invia a ogni partecipante i suoi compagni
+            for (Giocatore destinatario : gruppo) {
+
+                destinatario.output.println("MATCH");
+
+                for (Giocatore compagno : gruppo) {
+
+                    // Non inserisce il giocatore stesso
+                    if (compagno != destinatario) {
+
+                        destinatario.output.println(
+
 
 
 
