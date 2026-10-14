@@ -228,6 +228,22 @@ public class ServerMatchMaking {
 
                         destinatario.output.println(
 
+                            compagno.nickname + ";"
+                                + compagno.ip + ";"
+                                + compagno.livello);
+                    }
+                }
+
+                destinatario.output.println("END");
+                destinatario.output.flush();
+
+                // Risveglia il thread del giocatore
+                destinatario.attesaMatch.countDown();
+            }
+        }
+    }
+
+
 
 
 
