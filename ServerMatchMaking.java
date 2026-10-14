@@ -17,4 +17,52 @@ public class ServerMatchMaking {
         // Protegge il pool quando più thread lo utilizzano
     private static final Object lock = new Object();
 
-    
+    public static void main(String[] args) {
+
+       ServerSocket server = null;
+
+       try {
+        server = new ServerSocket(PORTA);
+
+        System.out.println("Giocatori per gruppo: " + NGG);
+
+       System.out.println("Differenza massima: " + DML);
+
+       System.out.println("Scrivi stop per terminare.");
+
+         // Thread dedicato al comando dell'amministratore
+            final ServerSocket serverAdmin = server;
+
+                       Thread amministratore = new Thread(() -> {
+                Scanner tastiera = new Scanner(System.in);
+
+                 while (tastiera.hasNextLine()) {
+                    String comando = tastiera.nextLine();
+
+                        if (comando.trim().equalsIgnoreCase("stop")) {
+                        try {
+                            serverAdmin.close();
+                        } catch (IOException e) {
+
+                            System.out.println(
+                                    "Errore durante la chiusura.");
+                        }
+
+                        break;
+                    }
+                }
+            });
+
+            amministratore.setDaemon(true);
+            amministratore.start();
+
+            // Il server continua ad accettare connessioni
+            while (true) {
+
+                try {
+                    Socket socket = server.accept();
+
+
+
+
+       }
