@@ -243,6 +243,25 @@ public class ServerMatchMaking {
         }
     }
 
+    // Cerca NGG giocatori con livelli sufficientemente vicini
+    private static List<Giocatore> trovaGruppo() {
+
+        if (inAttesa.size() < NGG) {
+            return null;
+        }
+
+        // Ordina i giocatori dal livello più basso al più alto
+        List<Giocatore> ordinati =
+                new ArrayList<>(inAttesa);
+
+        ordinati.sort(
+                Comparator.comparingInt(g -> g.livello));
+
+        // Esamina gruppi consecutivi nell'elenco ordinato
+        for (int i = 0; i <= ordinati.size() - NGG; i++) {
+
+            List<Giocatore> candidato = new ArrayList<>(
+                    ordinati.subList(i, i + NGG));
 
 
 
