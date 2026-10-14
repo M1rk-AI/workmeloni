@@ -119,6 +119,26 @@ public class ServerMatchMaking {
         }
     }
 
+    // Gestisce la singola connessione
+    static class GestoreClient implements Runnable {
+
+        private final Socket socket;
+
+        GestoreClient(Socket socket) {
+            this.socket = socket;
+        }
+
+         @Override
+        public void run() {
+
+            try (
+                Socket s = socket;
+                BufferedReader input = new BufferedReader(
+                        new InputStreamReader(s.getInputStream()));
+                PrintWriter output = new PrintWriter(
+                        s.getOutputStream(), true)
+            ) {
+
 
 
 
