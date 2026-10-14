@@ -1,25 +1,31 @@
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class ClientGiocatore {
 
+    private static String leggiLinea(BufferedReader input,
+            String prompt) throws IOException {
+        System.out.print(prompt);
+        String linea = input.readLine();
+
+        if (linea == null) {
+            throw new EOFException("Input terminato.");
+        }
+
+        return linea;
+    }
+
     public static void main(String[] args) {
 
-        Scanner tastiera = new Scanner(System.in);
+        try (BufferedReader tastiera =
+                new BufferedReader(new InputStreamReader(System.in))) {
 
-        try {
-            System.out.print("IP del server: ");
-            String ipServer = tastiera.nextLine();
-
-            System.out.print("Porta del server: ");
-            int porta = Integer.parseInt(tastiera.nextLine());
-
-            System.out.print("Nickname: ");
-            String nickname = tastiera.nextLine();
-
-            System.out.print("Livello: ");
-            int livello = Integer.parseInt(tastiera.nextLine());
+            String ipServer = leggiLinea(tastiera, "IP del server: ");
+            int porta = Integer.parseInt(
+                    leggiLinea(tastiera, "Porta del server: "));
+            String nickname = leggiLinea(tastiera, "Nickname: ");
+            int livello = Integer.parseInt(
+                    leggiLinea(tastiera, "Livello: "));
 
             // Connessione TCP al server
             try (

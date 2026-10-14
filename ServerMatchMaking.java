@@ -32,24 +32,27 @@ public class ServerMatchMaking {
 
          // Thread dedicato al comando dell'amministratore
             final ServerSocket serverAdmin = server;
+            final BufferedReader console =
+                    new BufferedReader(new InputStreamReader(System.in));
 
-                       Thread amministratore = new Thread(() -> {
-                Scanner tastiera = new Scanner(System.in);
+            Thread amministratore = new Thread(() -> {
+                try {
+                    String comando;
 
-                 while (tastiera.hasNextLine()) {
-                    String comando = tastiera.nextLine();
-
+                    while ((comando = console.readLine()) != null) {
                         if (comando.trim().equalsIgnoreCase("stop")) {
-                        try {
-                            serverAdmin.close();
-                        } catch (IOException e) {
-
-                            System.out.println(
-                                    "Errore durante la chiusura.");
+                            try {
+                                serverAdmin.close();
+                            } catch (IOException e) {
+                                System.out.println(
+                                        "Errore durante la chiusura.");
+                            }
+                            break;
                         }
-
-                        break;
                     }
+                } catch (IOException e) {
+                    System.out.println(
+                            "Errore lettura console: " + e.getMessage());
                 }
             });
 
