@@ -139,6 +139,30 @@ public class ServerMatchMaking {
                         s.getOutputStream(), true)
             ) {
 
+                   // Riceve i dati del giocatore
+                String nickname = input.readLine();
+                String livelloTesto = input.readLine();
+
+                if (nickname == null || livelloTesto == null) {
+                    return;
+                }
+
+                   int livello;
+
+                try {
+                    livello = Integer.parseInt(livelloTesto);
+                } catch (NumberFormatException e) {
+                    output.println("ERRORE");
+                    return;
+                }
+
+                                if (nickname.trim().isEmpty()
+                        || nickname.contains(";")
+                        || livello < 0) {
+                    output.println("ERRORE");
+                    return;
+                }
+
 
 
 
