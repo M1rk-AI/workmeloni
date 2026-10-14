@@ -164,6 +164,24 @@ public class ServerMatchMaking {
                 }
 
 
+                // Ricava l'IP del client dalla connessione TCP
+                String ip = s.getInetAddress().getHostAddress();
+
+                Giocatore nuovo = new Giocatore(
+                        nickname, ip, livello, output);
+
+                // Accesso sincronizzato alla lista condivisa
+                synchronized (lock) {
+
+                    inAttesa.add(nuovo);
+
+                    System.out.println(nickname
+                            + " in attesa, livello " + livello);
+
+                    creaMatchPossibili();
+                }
+
+
 
 
        }
