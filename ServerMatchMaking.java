@@ -181,6 +181,20 @@ public class ServerMatchMaking {
                     creaMatchPossibili();
                 }
 
+                   // Il thread resta fermo finché non viene creato
+                // il gruppo a cui appartiene questo giocatore
+                nuovo.attesaMatch.await();
+
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+
+            } catch (IOException e) {
+                System.out.println(
+                        "Connessione client terminata.");
+            }
+        }
+    }
+
 
 
 
